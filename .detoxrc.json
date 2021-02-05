@@ -1,0 +1,49 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "configurations": {
+      "ios.sim.debug": {
+        "type": "ios.simulator",
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/testingCommonApp.app",
+        "build": "xcodebuild -workspace ios/testingCommonApp.xcworkspace -scheme testingCommonApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "name": "iPhone 11"
+      },
+      "ios.sim.debug0": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/testingCommonApp.app",
+        "build": "xcodebuild -project ios/testingCommonApp.xcodeproj -scheme testingCommonApp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -UseModernBuildSystem=NO",
+        "type": "ios.simulator",
+        "name": "iPhone 11"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/testingCommonApp.app",
+        "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -project ios/testingCommonApp.xcodeproj -UseNewBuildSystem=NO -scheme testingCommonApp -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "type": "ios.simulator",
+        "name": "iPhone 11"
+      },
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build":
+          "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Pixel_4_XL_API_28"
+        }
+      },
+      "android.emu.release": {
+          "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+          "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+          "type": "android.emulator",
+          "device": {
+            "avdName": "Pixel_4_XL_API_28"
+          }
+      },
+      "android.real.release": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.attached",
+        "device": {
+          "adbName": "284ad7a1631c7ece"
+        }
+    }
+  }
+}
